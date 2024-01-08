@@ -1,7 +1,7 @@
 name: pheasant_assets
 description: A starting point for Dart libraries or applications.
 version: 0.1.0-alpha
-# repository: https://github.com/my_org/my_repo
+repository: https://github.com/pheasantframework/pheasant_assets
 
 environment:
   sdk: ^3.2.3
