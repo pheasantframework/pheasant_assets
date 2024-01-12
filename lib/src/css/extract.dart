@@ -10,7 +10,7 @@ String css(PheasantStyle pheasantStyle, {bool dev = false, String appPath = 'lib
   String styleData = pheasantStyle.data ?? "";
   if (pheasantStyle.data == null) {
     if (pheasantStyle.src == null) {
-      throw PheasantStyleException("The data field and src field cannot be null at the same time");
+      return '';
     } else {
       styleData = compileSassFile(pheasantStyle, pheasantStyle.src!, devDirPath: dev ? 'example' : null, componentDirPath: appPath);
       return styleData;
