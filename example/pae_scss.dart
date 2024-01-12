@@ -1,60 +1,64 @@
-import 'package:sass/sass.dart' as sass;
+// ignore: unused_import
+import 'package:pheasant_assets/pheasant_assets.dart';
 
 void main() {
-  final result = sass.compileStringToResult(
-    '''
-\$primary-color: #3498db;
-\$font-family: 'Arial', sans-serif;
+  String scssString = '''
+<style syntax="sass" local>
+\$secondary-color: #2ecc71;
 
-@mixin button-styles(\$bg-color: \$primary-color) {
-  background-color: \$bg-color;
-  color: #fff;
-  padding: 10px 20px;
-  border: none;
-  cursor: pointer;
+@mixin box-shadow(\$x, \$y, \$blur, \$color) {
+  box-shadow: \$x \$y \$blur \$color;
 }
 
-@function calculate-border-radius(\$size) {
-  @return \$size * 0.2;
-}
+section {
+  padding: 40px 0;
 
-%card-styles {
-  background-color: #fff;
-  padding: 20px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  border-radius: calculate-border-radius(10px);
-}
+  .featured-article {
+    background-color: \$secondary-color;
+    color: #fff;
+    padding: 20px;
+    @include box-shadow(0, 4px, 8px, rgba(0, 0, 0, 0.1));
 
-body {
-  background-color: #f4f4f4;
-  color: #333;
-  font-family: \$font-family;
+    h2 {
+      margin: 0 0 10px;
+    }
 
-  .container {
-    width: 80%;
-    margin: 0 auto;
+    p {
+      font-size: 1.2em;
+    }
   }
 
-  .button {
-    @include button-styles;
-  }
+  .article-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
 
-  .primary-button {
-    @include button-styles(\$primary-color);
-  }
+    .article {
+      width: 48%;
+      margin-bottom: 20px;
+      @include box-shadow(0, 2px, 4px, rgba(0, 0, 0, 0.1));
 
-  .card {
-    @extend %card-styles;
+      img {
+        width: 100%;
+        height: auto;
+      }
+
+      h3 {
+        margin: 10px;
+      }
+
+      p {
+        margin: 10px;
+        color: #555;
+      }
+    }
   }
 }
+</style>
+''';
+  PheasantStyle pheasantStyle = getStyleInput(scssString);
+  PheasantStyleScoped scopedPheasantStyle = scopeComponents(pheasantStyle);
 
-''',
-  );
-  print(result.css);
+  print('Style Syntax: ${scopedPheasantStyle.syntax}');
+  print('Style General Class ID: ${scopedPheasantStyle.id}');
 }
-
-int plusOne(int number) {return number++;}
-
-// sass to css
-// function to sass callable
-// css to scoped

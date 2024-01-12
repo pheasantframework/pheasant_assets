@@ -1,5 +1,6 @@
 name: pheasant_assets
-description: A starting point for Dart libraries or applications.
+description: >- 
+  Package for rendering styles and other external assets from the Pheasant Framework for Component Files.
 version: 0.1.0-alpha
 repository: https://github.com/pheasantframework/pheasant_assets
 
@@ -11,7 +12,7 @@ dependencies:
   csslib: ^1.0.0
   sass: ^1.69.7
   pheasant_meta: ^0.1.0-alpha
-  # path: ^1.8.0
+  path: ^1.8.0
 
 dependency_overrides: 
   pheasant_meta:

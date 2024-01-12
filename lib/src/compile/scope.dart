@@ -7,8 +7,8 @@ import '../sass/logger.dart';
 import 'package:sass/sass.dart' as sass;
 
 
-PheasantStyleScoped scopeComponents(PheasantStyle pheasantStyle) {
-  String cssData = css(pheasantStyle);
+PheasantStyleScoped scopeComponents(PheasantStyle pheasantStyle, {bool isDev = false, String appPath = 'lib'}) {
+  String cssData = css(pheasantStyle, dev: isDev, appPath: appPath);
   String specialid = makeId(pheasantStyle);
 
   String scopableCssData = '''

@@ -1,0 +1,29 @@
+body, h1, h2, p, ul, li {
+    margin: 0;
+    padding: 0;
+}
+
+/* Set basic styling for the body */
+body {
+    font-family: 'Arial', sans-serif;
+    line-height: 1.6;
+    background-color: #f4f4f4;
+    color: #333;
+}
+
+p {
+    color: #fff;
+    text-decoration: none;
+    padding: 10px;
+}
+
+@media screen and (max-width: 600px) {
+    nav {
+      text-align: center;
+    }
+  
+    nav p {
+      display: block;
+      margin-bottom: 5px;
+    }
+}

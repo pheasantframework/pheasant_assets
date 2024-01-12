@@ -1,6 +1,6 @@
 import '../assets.dart';
 
-PheasantStyle getStyleInput(String style) {
+PheasantStyle getStyleInput(String style, {bool sassEnabled = true}) {
   RegExp regex = RegExp(
     r'<style\s*' // Match the opening tag '<style' and one or more whitespaces
     r'(?:src="([^"]*)")?\s*' // Optional src attribute and its value
@@ -10,8 +10,12 @@ PheasantStyle getStyleInput(String style) {
   );
   Match mainMatch = regex.allMatches(style).first;
   String data = style.replaceFirst(regex, '').replaceFirst('</style>', '').trim();
-  return PheasantStyle(
-    // syntax: mainMatch[2] ?? 'css',
+  return sassEnabled ? PheasantStyle.sassEnabled(
+    syntax: mainMatch[2] ?? 'css',
+    src: mainMatch[1],
+    data: data.isEmpty ? null : data,
+    scope: mainMatch[3] == 'global' ? StyleScope.global : StyleScope.local
+  ) : PheasantStyle(
     src: mainMatch[1],
     data: data.isEmpty ? null : data,
     scope: mainMatch[3] == 'global' ? StyleScope.global : StyleScope.local
