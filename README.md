@@ -1,5 +1,8 @@
 # <center>The Pheasant Framework Assets Engine</center>
 
+![Pub Version](https://img.shields.io/pub/v/pheasant_assets?labelColor=rgb(245%2C%20193%2C%2066)&link=https%3A%2F%2Fpub.dev%2Fpackages%2Fpheasant_assets) ![Pub Publisher](https://img.shields.io/pub/publisher/pheasant_assets?labelColor=rgb(245%2C%20193%2C%2066)&link=https%3A%2F%2Fpub.dev%2Fpackages%2Fpheasant_assets)
+
+
 This is the Pheasant Framework Asset Engine, used to render and process styles and assets. The Pheasant Framework has inbuilt support for css styles through the `styles` component of the pheasant file, as well as support for `sass` and `scss`. 
 
 This package deals with the parsing, processing and scoping of these styles defined or imported in the `styles` component of pheasant files.
