@@ -1,12 +1,14 @@
-import 'dart:io';
+import 'dart:io' show Directory;
 
-import 'package:csslib/parser.dart' as css;
-import 'package:path/path.dart';
-import 'package:sass/sass.dart' as sass;
+import 'package:csslib/parser.dart' as css 
+  show Message, compile;
+import 'package:path/path.dart' show join;
+import 'package:sass/sass.dart' as sass 
+  show SassException, compileStringToResult, compileToResult, Syntax;
 
 import '../exceptions/exceptions.dart';
 import '../sass/logger.dart';
-import '../assets.dart';
+import '../assets.dart' show PheasantStyle;
 import '../constants/syntax.dart' as syn;
 
 /// Function used to compile css.

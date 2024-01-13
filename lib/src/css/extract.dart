@@ -1,4 +1,4 @@
-import '../assets.dart';
+import '../assets.dart' show PheasantStyle;
 import '../compile/compile.dart';
 import '../exceptions/exceptions.dart';
 

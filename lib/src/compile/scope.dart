@@ -6,7 +6,7 @@ import '../css/id_scope.dart';
 import '../assets.dart';
 import '../sass/logger.dart';
 
-import 'package:sass/sass.dart' as sass;
+import 'package:sass/sass.dart' as sass show SassException, compileStringToResult, Syntax;
 
 /// Function used to scope components.
 /// 

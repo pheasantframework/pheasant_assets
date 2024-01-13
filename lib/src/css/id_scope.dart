@@ -1,4 +1,4 @@
-import 'package:pheasant_assets/src/assets.dart';
+import '../assets.dart' hide StyleScope;
 
 /// Small function to help in the creation of ids used to identify and scope component styles in a pheasant component.
 /// 
