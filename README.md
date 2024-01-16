@@ -7,11 +7,11 @@ This is the Pheasant Framework Asset Engine, used to render and process styles a
 
 This package deals with the parsing, processing and scoping of these styles defined or imported in the `styles` component of pheasant files.
 
-This package is not intended for direct use by the end-user, but just as a supporting dev dependency for the Pheasant Framework and sibling packages - [pheasant_temp](https://github.com/pheasantframework/pheasant_temp) and [pheasant_build](https://github.com/pheasantframework/pheasant_build).
+This package is not intended for direct use by the end-user, but just as a supporting dependency for the Pheasant Framework and its sibling packages - [pheasant_temp](https://github.com/pheasantframework/pheasant_temp) and [pheasant_build](https://github.com/pheasantframework/pheasant_build).
 
 ### Some things to note
 
-This package is constantly under development, and may not be perfect. If you have any issues with this package, or any packages that depend on it because of this package, please feel free to raise an issue, and we will work on it. Ensure to [follow the guidelines](./CODE_OF_CONDUCT.md), though. 
+This package is constantly under development. If you have any issues with this package, or any packages in the Pheasant Framework, please feel free to raise an issue, and we will work on it in due time. Don't forget to [follow the guidelines](./CODE_OF_CONDUCT.md), though. 
 
 If you have any contributions to make, feel free, just [follow the contribution guidelines](./CONTRIBUTING.md), and make your contributions as guided. All contributions concerning this package are welcome and are reviewed in order to constantly give performant features.
 
