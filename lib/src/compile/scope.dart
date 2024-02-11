@@ -19,8 +19,8 @@ import 'package:sass/sass.dart' as sass show SassException, compileStringToResul
 /// Once scoping is finished, the function returns a scoped version of the [PheasantStyle] object - [PheasantStyleScoped].
 /// 
 /// Throws a [PheasantStyleException] if the scoping doesn't work
-PheasantStyleScoped scopeComponents(PheasantStyle pheasantStyle, {bool isDev = false, final String? appPath}) {
-  String cssData = css(pheasantStyle, dev: isDev, appPath: appPath ?? 'lib');
+PheasantStyleScoped scopeComponents(PheasantStyle pheasantStyle, {bool isDev = false, final String? appPath, bool sassEnabled = false}) {
+  String cssData = css(pheasantStyle, dev: isDev, appPath: appPath ?? 'lib', sassEnabled: sassEnabled);
   String specialid = makeId(pheasantStyle);
 
   String scopableCssData = '''
