@@ -24,7 +24,7 @@ import '../constants/syntax.dart' as syn;
 /// If the css is invalid, then it will write out [css.Message] messages, and all will be written to the console, then [PheasantStyleException] will be thrown.
 /// 
 /// If the synax isn't css, then the [sass] compiler will compile the css. Returns the compiled css as a String, throws a [PheasantStyleException] if the code didn't compile.
-String compileCss(PheasantStyle pheasantStyle, String cssString) {
+String compileCss(PheasantStyle pheasantStyle, String cssString, {bool sassEnabled = false}) {
   var cssErrors = <css.Message>[];
   if (!syn.syntax.contains(pheasantStyle.syntax)) {
     throw PheasantStyleException('Syntax is invalid: ${pheasantStyle.syntax}');
@@ -45,6 +45,7 @@ String compileCss(PheasantStyle pheasantStyle, String cssString) {
       return cssString;
     }
   } else {
+    if (!sassEnabled) throw PheasantStyleException('Sass is not enabled on this project. Set sass to true in your pheasant.yaml or pheasant.json file in your project to use sass');
     try {
       final cssData = sass.compileStringToResult(
         cssString, 
@@ -70,10 +71,14 @@ String compileCss(PheasantStyle pheasantStyle, String cssString) {
 /// The [componentDirPath] is the directory path of the pheasant file (or the css/sass/scss file) relative to the project. It defaults to `'lib'`.
 /// 
 /// The [devDirPath] is exclusively a gateway for the example code of this project, and should not be used outside the api.
-String compileSassFile(PheasantStyle pheasantStyle, String sassPath, {String componentDirPath = 'lib', String? devDirPath}) {
+String compileSassFile(PheasantStyle pheasantStyle, String sassPath, {String componentDirPath = 'lib', String? devDirPath, bool sassEnabled = false}) {
   String absPath = join(Directory.current.path, (devDirPath ?? componentDirPath), sassPath);
   if (!syn.syntax.contains(pheasantStyle.syntax)) {
     throw PheasantStyleException('Syntax is invalid: ${pheasantStyle.syntax}');
+  }
+
+  if ((sassPath.contains('.sass') || sassPath.contains('.scss')) && !sassEnabled) {
+    throw PheasantStyleException('Sass is not enabled on this project. Set sass to true in your pheasant.yaml or pheasant.json file in your project to use sass');
   }
 
   try {
