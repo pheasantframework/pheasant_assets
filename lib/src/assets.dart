@@ -1,25 +1,20 @@
 import 'css/id_scope.dart';
 
 /// A basic enum to denote scope levels in a pheasant style component.
-/// 
+///
 /// [global] represents styles that apply to the whole project, and do not need to be scoped to a particular component.
-/// 
+///
 /// [local] represents styles that apply only to the specified component, and so are scoped to that component by the `pheasant_assets` engine.
-/// 
+///
 /// [shared] is an unimplemented and not-yet-ready feature to represent styles that stem between components.
-/// 
+///
 /// [hybrid] is an unimplemented and not-yet-ready feature to represent styles that can be scoped and global (at certain parts of the document).
-enum StyleScope {
-  local, 
-  shared,
-  global,
-  hybrid
-}
+enum StyleScope { local, shared, global, hybrid }
 
 /// The base class for all pheasant styles under the `style` component of a pheasant file.
-/// 
+///
 /// This class encapsulates all important data about a pheasant style segment, including its [syntax], [scope] (which can be between `global` and `local`), the [data] inside it, and, if imported from a file, its file path - [src].
-/// 
+///
 /// ```scss
 /// <style syntax="scss" global>
 /// $primary-color: #3498db;
@@ -49,12 +44,12 @@ enum StyleScope {
 /// }
 /// </style>
 /// ```
-/// 
+///
 /// From the above, [data] would be everything in between the `<style>` tags, [syntax] would be `"scss"`, [scope] would be [StyleScope.global] and [src] would be `null`.
-/// 
+///
 /// All parameters are optional, except the `style` itself (obviously). In such cases, [syntax] is set to `"css"` and [scope] is set to [StyleScope.local].
-/// 
-/// This object helps in the encapsulation and parsing of pheasant styles. 
+///
+/// This object helps in the encapsulation and parsing of pheasant styles.
 class PheasantStyle {
   /// The regular expression used in parsing the pheasant `style` tags.
   static RegExp styleRegex = RegExp(
@@ -78,22 +73,30 @@ class PheasantStyle {
   final StyleScope scope;
 
   /// Default constructor for a [PheasantStyle] object
-  const PheasantStyle({this.src, this.data, this.scope = StyleScope.local}) : syntax = 'css';
+  const PheasantStyle({this.src, this.data, this.scope = StyleScope.local})
+      : syntax = 'css';
 
   /// Constructor used if `sass` is enabled during project configuration.
-  const PheasantStyle.sassEnabled({required this.syntax, this.src, this.data, this.scope = StyleScope.local});
+  const PheasantStyle.sassEnabled(
+      {required this.syntax,
+      this.src,
+      this.data,
+      this.scope = StyleScope.local});
 
-  /// Constructor to directly pass already scoped styles. 
+  /// Constructor to directly pass already scoped styles.
   /// Used mostly in parsing global styles that do not need scope.
-  factory PheasantStyle.scoped({
-    String data = '',
-    String src = '',
-    String syntax = 'css',
-    StyleScope scope = StyleScope.local,
-    String css = ''
-  }) {
-    PheasantStyle pheasantStyle = PheasantStyle.sassEnabled(data: data, src: src, syntax: syntax, scope: scope);
-    return PheasantStyleScoped(id: makeId(pheasantStyle), pheasantStyle: pheasantStyle, scoped: scope == StyleScope.local);
+  factory PheasantStyle.scoped(
+      {String data = '',
+      String src = '',
+      String syntax = 'css',
+      StyleScope scope = StyleScope.local,
+      String css = ''}) {
+    PheasantStyle pheasantStyle = PheasantStyle.sassEnabled(
+        data: data, src: src, syntax: syntax, scope: scope);
+    return PheasantStyleScoped(
+        id: makeId(pheasantStyle),
+        pheasantStyle: pheasantStyle,
+        scoped: scope == StyleScope.local);
   }
 
   @override
@@ -102,15 +105,15 @@ class PheasantStyle {
   }
 }
 
-/// The final result after adding scope and analyzing a [PheasantStyle] object. 
-/// 
-/// This object extends [PheasantStyle] by doing two things: 
+/// The final result after adding scope and analyzing a [PheasantStyle] object.
+///
+/// This object extends [PheasantStyle] by doing two things:
 /// It adds two new fields, [id] which represents the class id used to scope the css, which is later used in applying the scope to class declarations in the templating engine,
 /// and it scopes the css using the [id], to create a new css string - [css].
-/// 
-/// Before the scoping is applied, all css presented by [PheasantStyle] is compiled down to vanilla css 
+///
+/// Before the scoping is applied, all css presented by [PheasantStyle] is compiled down to vanilla css
 /// (normal css is compiled and analyzed to check for errors, while sass and scss is compiled by the in-built sass preprocessor to vanilla css), then scoped using the power of the sass preprocessor, and recompiled.
-/// 
+///
 /// Each `id` is final and is unique to each pheasant style. No two [PheasantStyleScoped] objects have the same `id`.
 class PheasantStyleScoped extends PheasantStyle {
   /// The unique id used to identify this specific object and its style. It is also used in the template engine for class declarations.
@@ -122,8 +125,15 @@ class PheasantStyleScoped extends PheasantStyle {
   /// The css data, stored as a [String]
   String css;
 
-  /// Default Constructor to create a new [PheasantStyleScoped] object. 
+  /// Default Constructor to create a new [PheasantStyleScoped] object.
   /// Must require a [PheasantStyle] as input, as well as [id].
-  PheasantStyleScoped({required this.id, required this.scoped, required PheasantStyle pheasantStyle, this.css = ''})
-  : super(data: pheasantStyle.data, scope: pheasantStyle.scope, src: pheasantStyle.src);
+  PheasantStyleScoped(
+      {required this.id,
+      required this.scoped,
+      required PheasantStyle pheasantStyle,
+      this.css = ''})
+      : super(
+            data: pheasantStyle.data,
+            scope: pheasantStyle.scope,
+            src: pheasantStyle.src);
 }
